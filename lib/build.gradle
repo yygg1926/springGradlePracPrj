@@ -1,0 +1,55 @@
+//apply plugin: 'java'
+//apply plugin: 'eclipse-wtp'
+//apply plugin: 'war'
+
+plugins {
+	id 'java'
+	id 'eclipse-wtp'
+	id 'war'
+}
+
+compileJava.options.encoding = 'UTF-8'
+sourceCompatibility = 1.7
+version = '1.0'
+
+eclipse {
+  wtp {
+    facet {
+      facet name: 'jst.web', version: '3.0' // Servlet Spec Version 지정
+      facet name: 'jst.java', version: '1.7' // Java Version 지정, 1.7 ...
+    }
+  }
+}
+
+jar {
+  manifest {
+    attributes 'Implementation-Title': 'Gradle Quickstart', 
+      'Implementation-Version': version
+  }
+}
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  implementation 'org.springframework:spring-context:4.0.3.RELEASE'
+  implementation 'commons-collections:commons-collections:3.2'
+  testImplementation 'junit:junit:4.+'
+}
+
+test {
+  systemProperties 'property': 'value'
+}
+/*
+publishing {
+  repositories {
+    //flatDir {
+    //  dirs 'repos'
+    //}
+    maven {
+            //name = 'repos'
+            url = layout.buildDirectory.dir("repos")
+        }
+  }
+}*/
